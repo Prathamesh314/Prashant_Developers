@@ -1,5 +1,5 @@
 {
-  "name": "my-app",
+  "name": "prashant-developers",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,19 +9,27 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "react": "19.1.0",
-    "react-dom": "19.1.0",
-    "next": "15.4.6"
+    "@hookform/resolvers": "^5.2.1",
+    "clsx": "^2.1.1",
+    "framer-motion": "^11.2.6",
+    "lucide-react": "^0.441.0",
+    "next": "14.2.5",
+    "nodemailer": "^7.0.5",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "react-hook-form": "^7.53.0",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
-    "typescript": "^5",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "@tailwindcss/postcss": "^4",
-    "tailwindcss": "^4",
-    "eslint": "^9",
-    "eslint-config-next": "15.4.6",
-    "@eslint/eslintrc": "^3"
+    "@types/node": "^20.14.11",
+    "@types/nodemailer": "^6.4.17",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "autoprefixer": "^10.4.21",
+    "eslint": "^8.57.0",
+    "eslint-config-next": "14.2.5",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.5.4"
   }
 }
