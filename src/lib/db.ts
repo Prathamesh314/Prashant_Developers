@@ -1,65 +1,53 @@
 // lib/db.ts
-import mongoose from "mongoose";
+import mongoose, { type ConnectOptions } from "mongoose";
 
-const MONGODB_URI = process.env.MONGODB_URI;
-if (!MONGODB_URI) {
-  throw new Error("Please define the MONGODB_URI environment variable inside .env.local");
-}
+const MONGODB_URI = process.env.MONGODB_URI!;
+if (!MONGODB_URI) throw new Error("Please define MONGODB_URI");
 
 declare global {
   // eslint-disable-next-line no-var
-  var _mongoose: { conn: typeof mongoose | null; promise: Promise<typeof mongoose> | null } | undefined;
+  var _mongoose:
+    | { conn: typeof mongoose | null; promise: Promise<typeof mongoose> | null }
+    | undefined;
 }
-
 let cached = global._mongoose || { conn: null, promise: null };
 global._mongoose = cached;
 
 export async function connectDb() {
-  if (cached.conn) {
-    console.log('[mongo] using cached connection');
-    return cached.conn;
-  }
+  if (cached.conn) return cached.conn;
 
   if (!cached.promise) {
-    console.log('[mongo] creating new connection...');
-    
-    // Configure mongoose settings
     mongoose.set("bufferCommands", false);
     mongoose.set("strictQuery", true);
 
-    // Connection event listeners
-    mongoose.connection.on("connecting", () => console.log("[mongo] connecting..."));
-    mongoose.connection.on("connected", () => console.log("[mongo] connected"));
-    mongoose.connection.on("error", (err) => console.error("[mongo] connection error:", err));
-    mongoose.connection.on("disconnected", () => console.warn("[mongo] disconnected"));
-
-    const opts = {
+    const opts: ConnectOptions & { dbName: string } = {
       dbName: "Ajinkya",
       maxPoolSize: 10,
-      serverSelectionTimeoutMS: 15000,  // Increased timeout
-      socketTimeoutMS: 45000,           // Increased timeout
-      connectTimeoutMS: 15000,          // Increased timeout
-      retryWrites: true,
-      w: 'majority'
+      serverSelectionTimeoutMS: 15000,
+      socketTimeoutMS: 45000,
+      connectTimeoutMS: 15000,
+      // Either of the following is fine:
+
+      // Option A: literal assertion
+      // w: 'majority' as const,
+
+      // Option B: use writeConcern (preferred)
+      writeConcern: { w: 'majority' as const },
     };
 
-    cached.promise = mongoose.connect(MONGODB_URI, opts)
-      .then((mongoose) => {
-        console.log('[mongo] connection established');
-        return mongoose;
+    cached.promise = mongoose
+      .connect(MONGODB_URI, opts)
+      .then((m) => {
+        console.log("[mongo] connection established");
+        return m;
       })
-      .catch((error) => {
-        console.error('[mongo] connection failed:', error);
-        cached.promise = null; // Reset promise on failure
-        throw error;
+      .catch((err) => {
+        console.error("[mongo] connection failed:", err);
+        cached.promise = null;
+        throw err;
       });
   }
 
-  try {
-    cached.conn = await cached.promise;
-    return cached.conn;
-  } catch (error) {
-    cached.promise = null; // Reset on failure
-    throw error;
-  }
+  cached.conn = await cached.promise;
+  return cached.conn;
 }
