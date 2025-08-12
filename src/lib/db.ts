@@ -26,12 +26,6 @@ export async function connectDb() {
       serverSelectionTimeoutMS: 15000,
       socketTimeoutMS: 45000,
       connectTimeoutMS: 15000,
-      // Either of the following is fine:
-
-      // Option A: literal assertion
-      // w: 'majority' as const,
-
-      // Option B: use writeConcern (preferred)
       writeConcern: { w: 'majority' as const },
     };
 
