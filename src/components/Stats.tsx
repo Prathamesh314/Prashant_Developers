@@ -1,6 +1,6 @@
 export default function Stats() {
     const stats = [
-      { label: 'Years Experience', value: '15+' },
+      { label: 'Years Experience', value: '25+' },
       { label: 'Projects Delivered', value: '120+' },
       { label: 'On-Time Delivery', value: '98%' },
       { label: 'Customer Satisfaction', value: '4.9/5' },

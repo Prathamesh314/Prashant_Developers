@@ -25,7 +25,7 @@ export default function Hero() {
           </ul>
         </div>
         <div className="relative">
-          <img src="/images/hero.jpg" alt="Modern duplex by Prashant Developers" className="h-full w-full rounded-3xl object-cover shadow-soft"/>
+          <img src="/images/img11.jpeg" alt="Modern duplex by Prashant Developers" className="h-full w-full rounded-3xl object-cover shadow-soft"/>
           <div className="absolute inset-0 rounded-3xl ring-1 ring-inset ring-black/5"/>
         </div>
       </div>

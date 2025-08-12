@@ -1,6 +1,9 @@
+import { connectDb } from '@/lib/db'
 import { NextResponse } from 'next/server'
 import { sendMail } from 'src/lib/email'
 import { enquirySchema } from 'src/lib/validator'
+
+connectDb()
 
 export async function POST(req: Request) {
   try {

@@ -12,48 +12,41 @@ export type Project = {
   
   export const projects: Project[] = [
     {
-      slug: 'green-meadows-duplex',
-      title: 'Green Meadows Duplex',
-      location: 'Baner, Pune',
-      year: 2024,
+      slug: 'green-meadows-flat',
+      title: 'Green Meadows Flat',
+      location: 'Arihant Nagar, Chandrapur',
+      year: 2008,
       status: 'Completed',
-      cover: '/images/projects/green-meadows/cover.jpg',
+      cover: '/images/img8.jpeg',
       images: [
-        '/images/projects/green-meadows/1.jpg',
-        '/images/projects/green-meadows/2.jpg',
-        '/images/projects/green-meadows/3.jpg'
+        
       ],
-      description: '3BHK luxury duplex with landscaped terrace and smart home features.',
-      specs: { areaSqft: 2400, floors: 2, type: 'Duplex' }
+      description: '3BHK luxury Flat with landscaped terrace and smart home features.',
+      specs: { areaSqft: 10000, floors: 3, type: 'Flat' }
     },
     {
       slug: 'skyline-apartments',
       title: 'Skyline Apartments',
-      location: 'Hinjawadi, Pune',
-      year: 2023,
+      location: 'Shastri Nagar, Chandrapur',
+      year: 2004,
       status: 'Completed',
-      cover: '/images/projects/skyline/cover.jpg',
+      cover: '/images/img9.jpeg',
       images: [
-        '/images/projects/skyline/1.jpg',
-        '/images/projects/skyline/2.jpg',
-        '/images/projects/skyline/3.jpg'
       ],
       description: '8-storey apartment block with premium amenities and RCC structure.',
-      specs: { areaSqft: 78000, floors: 8, type: 'Flat' }
+      specs: { areaSqft: 20000, floors: 4, type: 'Flat' }
     },
     {
-      slug: 'orchid-villa',
-      title: 'Orchid Villa',
-      location: 'Kothrud, Pune',
-      year: 2025,
-      status: 'Ongoing',
-      cover: '/images/projects/orchid/cover.jpg',
+      slug: 'orchid-flat',
+      title: 'Orchid Flat',
+      location: 'Civil Lines, Chandrapur',
+      year: 2011,
+      status: 'Completed',
+      cover: '/images/img7.jpeg',
       images: [
-        '/images/projects/orchid/1.jpg',
-        '/images/projects/orchid/2.jpg',
-        '/images/projects/orchid/3.jpg'
+        
       ],
-      description: 'Contemporary 4BHK villa with pool and double-height living.',
-      specs: { areaSqft: 4500, floors: 2, type: 'Villa' }
+      description: 'Contemporary 4BHK flat with pool and double-height living.',
+      specs: { areaSqft: 4500, floors: 3, type: 'Flat' }
     }
   ]

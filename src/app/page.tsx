@@ -8,7 +8,21 @@ import Stats from 'src/components/Stats'
 import { projects } from 'src/lib/project'
 
 export default function HomePage() {
-  const gallery = projects.flatMap(p => p.images.slice(0, 1))
+  const gallery = [
+    "/images/img1.jpeg",
+    "/images/img10.jpeg",
+    "/images/img11.jpeg",
+    "/images/img12.jpeg",
+    "/images/img13.jpeg",
+    "/images/img2.jpeg",
+    "/images/img3.jpeg",
+    "/images/img4.jpeg",
+    "/images/img5.jpeg",
+    "/images/img6.jpeg",
+    "/images/img7.jpeg",
+    "/images/img8.jpeg",
+    "/images/img9.jpeg"
+  ]
 
   return (
     <>

@@ -88,19 +88,47 @@ export default function EstimateForm() {
     }
   }, [values])
 
-  const onSubmit = async (data: FormData) => {
-    const res = await fetch('/api/estimate', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ ...data, preview: result })
-    })
-    if (res.ok) {
-      const { id } = await res.json()
-      setQuoteId(id)
-      alert('Estimate submitted. Our team will contact you!')
-      reset()
-    } else {
-      alert('Failed to submit. Try again.')
+  
+  const onSubmit = (data: FormData) => {
+    try {
+      console.log('Submitting data:', data)
+      console.log('Result preview:', result)
+      
+      const payload = { ...data, preview: result }
+      console.log('Full payload:', payload)
+      
+      // Synchronous XMLHttpRequest
+      const xhr = new XMLHttpRequest();
+      xhr.open('POST', '/api/estimate', false); // false makes it synchronous
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.send(JSON.stringify(payload));
+      
+      console.log('Response status:', xhr.status);
+      
+      if (xhr.status >= 200 && xhr.status < 300) {
+        let responseData;
+        try {
+          responseData = JSON.parse(xhr.responseText);
+        } catch {
+          responseData = {};
+        }
+        console.log('Success response:', responseData)
+        setQuoteId(responseData.id)
+        alert('Estimate submitted. Our team will contact you!')
+        reset()
+      } else {
+        let errorData;
+        try {
+          errorData = JSON.parse(xhr.responseText);
+        } catch {
+          errorData = { error: 'Unknown error' };
+        }
+        console.error('Error response:', errorData)
+        alert(`Failed to submit: ${errorData.error || 'Unknown error'}`)
+      }
+    } catch (error) {
+      console.error('Submit error:', error)
+      alert('Failed to submit. Please try again.')
     }
   }
 
@@ -187,23 +215,6 @@ export default function EstimateForm() {
           <label className="text-sm">Email (optional)</label>
           <input type="email" {...register('email')} className="mt-1 w-full rounded-lg border border-slate-300 p-3" placeholder="you@email.com" />
           {errors.email && <p className="mt-1 text-sm text-red-600">{typeof errors.email?.message === 'string' ? errors.email.message : ''}</p>}
-        </div>
-      </div>
-
-      <div className="mt-6 grid gap-4 md:grid-cols-3">
-        <div className="card">
-          <div className="text-sm text-slate-500">Rate</div>
-          <div className="text-2xl font-bold">₹{result?.rate?.toLocaleString()}/sqft</div>
-        </div>
-        <div className="card">
-          <div className="text-sm text-slate-500">Base + Contingency + Taxes</div>
-          <div className="text-2xl font-bold">₹{result?.total?.toLocaleString() || 0}</div>
-        </div>
-        <div className="card">
-          <div className="text-sm text-slate-500">Breakup</div>
-          <div className="text-sm">Base: ₹{result?.base.toLocaleString() || 0}</div>
-          <div className="text-sm">Contingency: ₹{result?.contingency.toLocaleString() || 0}</div>
-          <div className="text-sm">Taxes: ₹{result?.taxes.toLocaleString() || 0}</div>
         </div>
       </div>
 

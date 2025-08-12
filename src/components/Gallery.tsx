@@ -5,6 +5,8 @@ export default function Gallery({ images }: { images: string[] }) {
   const [open, setOpen] = useState(false)
   const [active, setActive] = useState(0)
 
+  console.log("Gallery: ", images)
+
   return (
     <div>
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
