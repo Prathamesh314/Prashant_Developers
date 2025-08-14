@@ -28,7 +28,7 @@ export default function Navbar() {
           ))}
         </nav>
         <div className="hidden md:block">
-          <a href="tel:+919999999999" className="btn btn-primary"><Phone className="h-4 w-4"/> +91 99999 99999</a>
+          <a href="tel:+919175735018" className="btn btn-primary"><Phone className="h-4 w-4"/> +91 9175735018</a>
         </div>
         <button className="md:hidden" onClick={() => setOpen(!open)} aria-label="Menu">
           {open ? <X /> : <Menu />}
@@ -42,7 +42,7 @@ export default function Navbar() {
                 {l.label}
               </Link>
             ))}
-            <a href="tel:+919999999999" className="btn btn-primary w-full justify-center"><Phone className="h-4 w-4"/> Call Us</a>
+            <a href="tel:+919175735018" className="btn btn-primary w-full justify-center"><Phone className="h-4 w-4"/> Call Us</a>
           </div>
         </div>
       )}

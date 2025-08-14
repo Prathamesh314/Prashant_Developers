@@ -20,9 +20,10 @@ export default function Footer() {
         <div>
           <h4 className="font-semibold">Contact</h4>
           <ul className="mt-3 space-y-2 text-sm text-slate-700">
-            <li>+91 99999 99999</li>
-            <li>sales@prashantdevelopers.com</li>
-            <li>123, Main Road, Pune, Maharashtra</li>
+            <li>+91 9175735018</li>
+            <li>+91 9021070833</li>
+            <li>prashantmohitkar9@gmail.com</li>
+            <li>Behind Havmor Ice cream parlour, DOC Road, Sangeet Nagar, ST workshop, Tukum, Chandrapur</li>
           </ul>
         </div>
         <div>
