@@ -1,26 +1,24 @@
 import { connectDb } from '@/lib/db'
 import { NextResponse } from 'next/server'
-import { sendMail } from 'src/lib/email'
 import { enquirySchema } from 'src/lib/validator'
-
-connectDb()
+import Enquiry from 'src/models/Enquiry'
 
 export async function POST(req: Request) {
   try {
+    await connectDb()
     const json = await req.json()
     const data = enquirySchema.parse(json)
 
-    const html = `
-      <h2>New Enquiry</h2>
-      <p><b>Name:</b> ${data.name}</p>
-      <p><b>Phone:</b> ${data.phone}</p>
-      <p><b>Email:</b> ${data.email ?? ''}</p>
-      <p><b>City:</b> ${data.city ?? ''}</p>
-      <p><b>Message:</b><br/>${data.message}</p>
-    `
-    await sendMail('New Website Enquiry', html)
-
-    return NextResponse.json({ ok: true })
+    const enquiry = await Enquiry.create({
+      name: data.name,
+      phone: data.phone,
+      email: data.email,
+      city: data.city ?? "Not provided",
+      message: data.message
+    });
+    
+    console.log("Enquiry added: ", enquiry._id)
+    return NextResponse.json({ ok: true, enquiry_id: enquiry._id })
   } catch (e: any) {
     return NextResponse.json({ ok: false, error: e?.message ?? 'Invalid payload' }, { status: 400 })
   }
