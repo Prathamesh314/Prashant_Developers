@@ -240,7 +240,7 @@ export default function EstimateForm() {
             {errors.phone && <p className="mt-1 text-sm text-red-600">{errors.phone.message}</p>}
           </div>
           <div>
-            <label className="text-sm">Email</label>
+            <label className="text-sm">Email (Optional)</label>
             <input type="email" {...register('email')} className="mt-1 w-full rounded-lg border border-slate-300 p-3" placeholder="you@email.com" />
             {errors.email && <p className="mt-1 text-sm text-red-600">{typeof errors.email?.message === 'string' ? errors.email.message : ''}</p>}
           </div>
