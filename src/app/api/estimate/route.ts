@@ -1,8 +1,7 @@
 import { NextResponse } from 'next/server'
-import { sendMail } from '../../../lib/email'
 import { z } from 'zod'
 import { connectDb } from '@/lib/db'
-import User from 'src/models/User'
+import Estimates from 'src/models/Estimate'
 
 const estimateSchema = z.object({
   withMaterial: z.boolean(),
@@ -33,7 +32,7 @@ export async function POST(req: Request) {
     console.log('Database connected successfully')
     
     // Create a new user document and save to db
-    const user = await User.create({
+    const estimate = await Estimates.create({
         name: data.name,
         phone: data.phone,
         city: data.city ?? "Not provided",
@@ -44,8 +43,8 @@ export async function POST(req: Request) {
         quality: data.quality,
       });
 
-    console.log('User created:', user._id)
-    return NextResponse.json({ ok: true, id: user._id })
+    console.log('User created:', estimate._id)
+    return NextResponse.json({ ok: true, id: estimate._id })
     
   } catch (e: any) {
     console.error('API Error:', e)

@@ -2,7 +2,7 @@
 
 import { Schema, model, models } from 'mongoose';
 
-const UserSchema = new Schema({
+const EstimateSchema = new Schema({
   name: { type: String, required: true },
   phone: { type: String, required: true },
   city: { type: String, default: 'Not provided' },
@@ -11,8 +11,8 @@ const UserSchema = new Schema({
   areaSqft: { type: Number, required: true },
   floors: { type: Number, required: true },
   quality: { type: String, required: true }
-}, { timestamps: true, collection: "Users"});
+}, { timestamps: true, collection: "Estimates"});
 
-const User = models.User || model('User', UserSchema);
+const Estimates = models.Estimates || model('Estimates', EstimateSchema);
 
-export default User;
+export default Estimates;

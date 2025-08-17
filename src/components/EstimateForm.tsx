@@ -236,7 +236,18 @@ export default function EstimateForm() {
           </div>
           <div>
             <label className="text-sm">Phone</label>
-            <input {...register('phone')} className="mt-1 w-full rounded-lg border border-slate-300 p-3" />
+            <input
+              {...register('phone', {
+                required: 'Phone number is required',
+                pattern: {
+                  value: /^[0-9]{10}$/,
+                  message: 'Please enter a valid 10-digit phone number',
+                },
+              })}
+              maxLength={10}
+              className="mt-1 w-full rounded-lg border border-slate-300 p-3"
+              placeholder="e.g. 9876543210"
+            />
             {errors.phone && <p className="mt-1 text-sm text-red-600">{errors.phone.message}</p>}
           </div>
           <div>
